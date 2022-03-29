@@ -1,0 +1,776 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Live Chat Api",
+    "description": "Live Chat api docs",
+    "contact": {},
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3008/",
+      "description": "local"
+    }
+  ],
+  "paths": {
+    "/users/create": {
+      "post": {
+        "tags": [
+          "User Management"
+        ],
+        "summary": "Create User",
+        "description": "Creates User",
+        "operationId": "CreateUser",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "application/json"
+              ]
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": ""
+              },
+              "example": {
+                "firstName": "Amit",
+                "lastName": "Mahato",
+                "type": "consumer"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": " Get the response based on scenarios appears below example schema",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": true,
+                  "user": {
+                    "firstName": "Amit",
+                    "lastName": "Mahato",
+                    "type": "consumer",
+                    "_id": "297c6690-e4fb-46b8-84d9-48f2ad90a184",
+                    "createdAt": "2022-03-29T03:12:44.887Z",
+                    "updatedAt": "2022-03-29T03:12:44.887Z",
+                    "__v": 0
+                  }
+                },
+                "schema": {
+                  "$ref": "#"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request errors",
+            "content": {
+              "application/json": {
+                "example": [
+                  {
+                    "success": false,
+                    "message": "Kindly fix the error(s)",
+                    "errors": {
+                      "type": "Possible value are consumer,support"
+                    }
+                  },
+                  {
+                    "success": false,
+                    "message": "Kindly fix the error(s)",
+                    "errors": {
+                      "type": "please provide a string"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": false,
+                  "error": {
+                    "error": "No user with this id found"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/users/{userId}": {
+      "get": {
+        "tags": [
+          "User Management"
+        ],
+        "summary": "Fetch User by ID",
+        "description": "Fetch User by ID",
+        "operationId": "fetchUser by ID",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "application/json"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get the response based on scenarios appears below example schema",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": true,
+                  "user": {
+                    "firstName": "Amit",
+                    "lastName": "Mahato",
+                    "type": "consumer",
+                    "createdAt": "2022-03-29T03:12:44.887Z",
+                    "updatedAt": "2022-03-29T03:12:44.887Z",
+                    "__v": 0
+                  }
+                },
+                "schema": {
+                  "$ref": "#"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": false,
+                  "error": {
+                    "error": "No user with this id found"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/users": {
+      "get": {
+        "tags": [
+          "User Management"
+        ],
+        "summary": "Fetch All User",
+        "description": "Fetch All User",
+        "operationId": "fetchUser All User",
+        "responses": {
+          "200": {
+            "description": "Get the response based on scenarios appears below example schema",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": true,
+                  "user": [
+                    {
+                      "firstName": "Amit",
+                      "lastName": "Mahato",
+                      "type": "consumer",
+                      "createdAt": "2022-03-29T03:12:44.887Z",
+                      "updatedAt": "2022-03-29T03:12:44.887Z",
+                      "__v": 0
+                    },
+                    {
+                      "firstName": "Mahesh",
+                      "lastName": "Kumar",
+                      "type": "consumer",
+                      "createdAt": "2022-03-29T03:12:44.887Z",
+                      "updatedAt": "2022-03-29T03:12:44.887Z",
+                      "__v": 0
+                    }
+                  ]
+                },
+                "schema": {
+                  "$ref": "#"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": false,
+                  "error": {
+                    "error": "Something went wrong !"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/users/delete/{userId}": {
+      "delete": {
+        "tags": [
+          "User Management"
+        ],
+        "summary": "Delete User",
+        "description": "Delete User",
+        "operationId": "DeleteUser",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get the response based on scenarios appears below example schema",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": true,
+                  "message": "Deleted a count of 1 user."
+                },
+                "schema": {
+                  "$ref": "#"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": false,
+                  "error": {
+                    "error": "Something went wrong !"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/login/{userId}": {
+      "post": {
+        "tags": [
+          "Auth Management"
+        ],
+        "summary": "Login by userId in chat server",
+        "description": "Login user",
+        "operationId": "loginUser",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": " Get the response based on scenarios appears below example schema",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": true,
+                  "authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDM3MmRmMzBhYWE0YTM4YWM4YTAzNWVlMzAyZjA1ZiIsInVzZXJUeXBlIjoiY29uc3VtZXIiLCJpYXQiOjE2NDg1NDcxMzJ9.L3wCvl3ndKyj2oPwHjnx7Len8Qln2ek5kmA1zQfF2hw"
+                },
+                "schema": {
+                  "$ref": ""
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": false,
+                  "message": "No user with this id found"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/room/initiate": {
+      "post": {
+        "tags": [
+          "Chat Management"
+        ],
+        "summary": "Initiate Chat",
+        "description": "Chat started",
+        "operationId": "startChat",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "application/json"
+              ]
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDM3MmRmMzBhYWE0YTM4YWM4YTAzNWVlMzAyZjA1ZiIsInVzZXJUeXBlIjoiY29uc3VtZXIiLCJpYXQiOjE2NDg0NzUzMDB9.9BaJJByPmirNCO5x6A60xfiHsefv-tdfx_CuHdXLWtE"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": ""
+              },
+              "example": {
+                "userId": [
+                  "d2c97b7f1b014e61bedf107bc4a4cf3d"
+                ],
+                "type": "consumer-to-consumer"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": true,
+                  "chatRoom": {
+                    "isNew": true,
+                    "message": "creating a new chatroom",
+                    "chatRoomId": "bf034fcc-e456-48b3-8fba-b310cf5e4b8e",
+                    "type": "consumer-to-consumer"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "example": [
+                  {
+                    "success": false,
+                    "message": "No access token provided"
+                  },
+                  {
+                    "success": false,
+                    "message": "Kindly fix the error(s)",
+                    "errors": {
+                      "userIds": "Please provide an array",
+                      "type": "Possible value are consumer-to-consumer,consumer-to-support"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": false,
+                  "error": "Something went wrong !"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/room/{roomId}/message": {
+      "post": {
+        "tags": [
+          "Chat Management"
+        ],
+        "summary": "Post Message",
+        "description": "Message Post",
+        "operationId": "PostChat",
+        "parameters": [
+          {
+            "name": "roomId",
+            "in": "path",
+            "description": "roomId which is already initiated by user",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "application/json"
+              ]
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDM3MmRmMzBhYWE0YTM4YWM4YTAzNWVlMzAyZjA1ZiIsInVzZXJUeXBlIjoiY29uc3VtZXIiLCJpYXQiOjE2NDg0NzUzMDB9.9BaJJByPmirNCO5x6A60xfiHsefv-tdfx_CuHdXLWtE"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": ""
+              },
+              "example": {
+                "messageText": "Hi how are you ?"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": true,
+                  "post": {
+                    "_id": "fc4018f1-dc88-41fd-be12-6e729cb3bfbc",
+                    "postId": "f7b5ff70-f354-41e7-bda0-7d820c49c280",
+                    "chatRoomId": "fc4018f1-dc88-41fd-be12-6e729cb3bfbc",
+                    "message": {
+                      "messageText": "mjhe bhuk lagi hai"
+                    },
+                    "type": "text",
+                    "postedByUser": {
+                      "_id": "297c6690-e4fb-46b8-84d9-48f2ad90a184",
+                      "firstName": "Mans",
+                      "lastName": "Kumar",
+                      "type": "consumer",
+                      "createdAt": "2022-03-29T03:12:44.887Z",
+                      "updatedAt": "2022-03-29T03:12:44.887Z",
+                      "__v": 0
+                    },
+                    "readByRecipients": [
+                      {
+                        "readByUserId": "297c6690-e4fb-46b8-84d9-48f2ad90a184",
+                        "readAt": "2022-03-29T09:45:26.555Z"
+                      }
+                    ],
+                    "chatRoomInfo": [
+                      {
+                        "_id": "64372df30aaa4a38ac8a035ee302f05f",
+                        "firstName": "Manoj",
+                        "lastName": "Kumar",
+                        "type": "consumer",
+                        "createdAt": "2022-03-29T10:51:11.131Z",
+                        "updatedAt": "2022-03-29T10:51:11.131Z",
+                        "__v": 0
+                      }
+                    ],
+                    "createdAt": "2022-03-29T10:51:11.131Z",
+                    "updatedAt": "2022-03-29T10:51:11.131Z"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": false,
+                  "message": "Kindly fix the error(s)",
+                  "errors": {
+                    "messageText": "please provide a string"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": false,
+                  "error": "Something went wrong !"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/room/{roomId}": {
+      "get": {
+        "tags": [
+          "Chat Management"
+        ],
+        "summary": "Fetch Chats",
+        "description": "Fetch messages from chatroom",
+        "operationId": "fetchChat",
+        "parameters": [
+          {
+            "name": "roomId",
+            "in": "path",
+            "description": "roomId which you want to see chats",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDM3MmRmMzBhYWE0YTM4YWM4YTAzNWVlMzAyZjA1ZiIsInVzZXJUeXBlIjoiY29uc3VtZXIiLCJpYXQiOjE2NDg0NzUzMDB9.9BaJJByPmirNCO5x6A60xfiHsefv-tdfx_CuHdXLWtE"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": true,
+                  "conversation": [
+                    {
+                      "_id": "9a339467-27c7-46ed-b0e7-f7f98a3e9fb3",
+                      "chatRoomId": "fc4018f1-dc88-41fd-be12-6e729cb3bfbc",
+                      "message": {
+                        "messageText": "mjhe bhuk lagi hai"
+                      },
+                      "postedByUser": {
+                        "_id": "297c6690-e4fb-46b8-84d9-48f2ad90a184",
+                        "firstName": "Mans",
+                        "lastName": "Kumar",
+                        "type": "consumer",
+                        "createdAt": "2022-03-29T03:12:44.887Z",
+                        "updatedAt": "2022-03-29T03:12:44.887Z",
+                        "__v": 0
+                      },
+                      "readByRecipients": [
+                        {
+                          "readByUserId": "297c6690-e4fb-46b8-84d9-48f2ad90a184",
+                          "readAt": "2022-03-29T09:45:26.555Z"
+                        }
+                      ],
+                      "type": "text",
+                      "createdAt": "2022-03-29T10:51:11.131Z",
+                      "updatedAt": "2022-03-29T10:51:11.131Z",
+                      "_v": 0
+                    }
+                  ],
+                  "users": [
+                    {
+                      "_id": null,
+                      "firstName": "Manoj",
+                      "lastName": "kumar",
+                      "type": "consumer",
+                      "createdAt": "2022-03-28T10:31:00.409Z",
+                      "updatedAt": "2022-03-28T10:31:00.409Z",
+                      "__v": 0
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "example": [
+                  {
+                    "success": false,
+                    "message": "No room exists for this id"
+                  },
+                  {
+                    "success": false,
+                    "message": "No access token provided"
+                  },
+                  {
+                    "success": false,
+                    "message": "invalid signature"
+                  }
+                ]
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": false,
+                  "error": "Something went wrong !"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/room/{roomId}/mark-read": {
+      "put": {
+        "tags": [
+          "Chat Management"
+        ],
+        "summary": "Mark as read",
+        "description": "Mark as read inside chatroom",
+        "operationId": "markReadChat",
+        "parameters": [
+          {
+            "name": "roomId",
+            "in": "path",
+            "description": "chats which you want to read chats",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDM3MmRmMzBhYWE0YTM4YWM4YTAzNWVlMzAyZjA1ZiIsInVzZXJUeXBlIjoiY29uc3VtZXIiLCJpYXQiOjE2NDg0NzUzMDB9.9BaJJByPmirNCO5x6A60xfiHsefv-tdfx_CuHdXLWtE"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": true,
+                  "data": {
+                    "acknowledged": true,
+                    "modifiedCount": 1,
+                    "upsertedId": null,
+                    "upsertedCount": 0,
+                    "matchedCount": 1
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "example": [
+                  {
+                    "success": false,
+                    "message": "No room exists for this id"
+                  },
+                  {
+                    "success": false,
+                    "message": "No access token provided"
+                  },
+                  {
+                    "success": false,
+                    "message": "invalid signature"
+                  }
+                ]
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": false,
+                  "error": "Something went wrong !"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    }
+  }
+}
